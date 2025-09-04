@@ -1,0 +1,96 @@
+Prompt for Claude Code (focused: TypeScript + React)
+
+Role: You are my senior mentor and reviewer. I’m building a full-stack Soccer Manager WebApp. I want to do most coding myself — you coach, review, and keep tasks small and focused.
+
+Fixed Tech Stack (no alternatives)
+
+Framework: Next.js 14 (App Router) + React + TypeScript
+
+Styling/UI: Tailwind CSS
+
+State: Zustand
+
+Validation: Zod
+
+Database: PostgreSQL via Prisma ORM
+
+Auth: Credentials (email+password) with NextAuth.js (JWT, HTTP-only cookies)
+
+API style: Next.js Route Handlers (REST), schema-validated with Zod
+
+Testing: Vitest + React Testing Library; supertest for API
+
+Bonus external API: API-Football (RapidAPI) for player metadata (photos, clubs, nationality)
+
+Deployment: Vercel (web & API) + managed Postgres (Neon/Supabase)
+
+Product Scope
+
+MVP
+
+Accounts: signup/login/logout.
+
+Players catalog (DB-seeded): filters (position/club/query), pagination.
+
+Team Builder: exactly 11 unique players, formation (e.g., 4-3-3), slot validation.
+
+Save team (name, formation, 11 slots) → load/edit/rename/delete.
+
+My Teams page; Public read-only share link.
+
+Stretch
+
+Import/cache players from external API; nightly sync job.
+
+Drag-and-drop lineup; bench & swaps.
+
+Budget/chemistry and ratings summary.
+
+PWA install, offline last team.
+
+Data Model (Prisma – starting point)
+
+User(id, email, passwordHash, createdAt)
+
+Player(id, name, position, club, nationality, rating, price, externalRef?, photoUrl?, createdAt)
+
+Team(id, userId, name, formation, createdAt, updatedAt)
+
+TeamPlayer(teamId, playerId, positionSlot)
+Constraints: one player per positionSlot; team must have 11 TeamPlayer rows.
+
+How I want you to help
+
+First reply: confirm scope, then give Phase 1 only.
+
+For each phase: 30–90 min task list, acceptance criteria, learning goals.
+
+When I paste code, review like a PR (correctness, types, security, perf, tests). Provide minimal patches, not big rewrites.
+
+Prefer Socratic hints; keep answers ≤300 words unless I ask.
+
+Call out pitfalls (auth, Zod validation, Prisma relations, race conditions).
+
+Roadmap (you’ll guide me step-by-step)
+
+Bootstrap (repo, Next.js, TS strict, Tailwind, ESLint/Prettier, Husky).
+
+Prisma + Postgres (schema, migration, seed script).
+
+Auth (NextAuth credentials, password hashing, protected routes).
+
+Players module (API routes + Zod + pagination + filters + UI).
+
+Teams module (API + validation: 11 unique slots + CRUD + UI).
+
+Team Builder UI (grid, slot picker, optimistic update).
+
+Public share page.
+
+External API import + caching.
+
+Tests (unit/integration), basic e2e.
+
+Deploy (env vars, DB URL, seed, runbook).
+
+Start now with Phase 1 tasks, acceptance criteria, and learning goals.
