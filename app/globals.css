@@ -2,74 +2,299 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Football-themed CSS Custom Properties */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Primary Football Colors */
+  --field-green: #1B5E20;
+  --grass-green: #2E7D32; 
+  --pitch-light: #4CAF50;
+  --stadium-white: #FAFAFA;
+  --line-white: #FFFFFF;
+  
+  /* Accent Colors */
+  --champions-gold: #FFD700;
+  --red-card: #D32F2F;
+  --yellow-card: #FFA000;
+  --night-sky: #0D47A1;
+  --charcoal: #212121;
+  --stadium-gray: #424242;
+  --field-shadow: rgba(27, 94, 32, 0.1);
+  
+  /* Gradients */
+  --field-gradient: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #4CAF50 100%);
+  --stadium-gradient: linear-gradient(to bottom, #FAFAFA 0%, #F5F5F5 100%);
+  --grass-texture: 
+    repeating-linear-gradient(
+      90deg,
+      #2E7D32 0px,
+      #2E7D32 40px,
+      #1B5E20 40px,
+      #1B5E20 80px
+    );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--stadium-gradient);
+  color: var(--charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Football-themed utility classes */
+.football-gradient {
+  background: var(--field-gradient);
+}
+
+.grass-texture {
+  background: var(--grass-texture);
+}
+
+.stadium-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.field-shadow {
+  box-shadow: 
+    0 10px 25px var(--field-shadow),
+    0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px var(--field-shadow),
+    0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional Football Buttons */
+.btn-primary {
+  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg;
+  background: var(--field-gradient);
+  border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--field-shadow);
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  background: white;
+  color: var(--field-green);
+  border: 2px solid var(--field-green);
+}
+
+.btn-secondary:hover {
+  background: var(--field-green);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+  background: var(--red-card);
+}
+
+.btn-danger:hover {
+  background: #B71C1C;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+  background: var(--champions-gold);
+  color: var(--charcoal);
+}
+
+.btn-success:hover {
+  background: #FFB300;
+  transform: translateY(-2px);
+}
+
+/* Premium Card Styles */
+.football-card {
+  @apply bg-white rounded-2xl border-0 overflow-hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(27, 94, 32, 0.1);
+}
+
+.football-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(27, 94, 32, 0.15);
+}
+
+/* Stadium-style Input Fields */
+.stadium-input {
+  @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-300;
+  font-family: 'Inter', sans-serif;
+}
+
+.stadium-input:focus {
+  outline: none;
+  border-color: var(--field-green);
+  box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1);
+}
+
+/* Enhanced Grid Systems */
 .players-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
 }
 
 @media (max-width: 640px) {
-  .players-grid {
+  .players-grid,
+  .teams-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
-  .players-grid {
+  .players-grid,
+  .teams-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1025px) {
-  .players-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
+/* Soccer Field Visualization */
+.soccer-field {
+  background: var(--grass-texture);
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-/* Team Builder hover effects */
+.soccer-field::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%),
+    linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+.field-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.field-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1px;
+}
+
+/* Team Builder Enhanced Styles */
 .player-slot {
   position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.player-slot:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--champions-gold);
 }
 
 .player-slot .tooltip {
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
+  transform: translateY(10px);
 }
 
 .player-slot .remove-btn {
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.8);
 }
 
 .player-slot:hover .tooltip {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .player-slot:hover .remove-btn {
   opacity: 1;
+  transform: scale(1);
+}
+
+/* Loading and Animation States */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Status indicators */
+.status-success {
+  @apply px-3 py-1 rounded-full text-sm font-medium;
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--grass-green);
+}
+
+.status-warning {
+  @apply px-3 py-1 rounded-full text-sm font-medium;
+  background: rgba(255, 160, 0, 0.1);
+  color: var(--yellow-card);
+}
+
+.status-error {
+  @apply px-3 py-1 rounded-full text-sm font-medium;
+  background: rgba(211, 47, 47, 0.1);
+  color: var(--red-card);
 }
