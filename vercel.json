@@ -1,0 +1,21 @@
+{
+  "name": "soccer-manager-webapp",
+  "version": 2,
+  "regions": ["cle1"],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/admin/sync-players",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

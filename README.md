@@ -28,18 +28,21 @@ A web-based soccer team management application built with Next.js, allowing user
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd soccermanager
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory with the following variables:
+   Create a `.env.local` file in the root directory with the following variables:
+
 ```env
 DATABASE_URL="file:./dev.db"
 NEXTAUTH_URL="http://localhost:3000"
@@ -47,6 +50,7 @@ NEXTAUTH_SECRET="your-secret-key-here"
 ```
 
 4. Set up the database:
+
 ```bash
 # Generate Prisma client
 npx prisma generate
@@ -61,12 +65,15 @@ npm run db:seed
 ## Running the Application
 
 ### Development Mode
+
 ```bash
 npm run dev
 ```
+
 The application will be available at `http://localhost:3000`
 
 ### Production Mode
+
 ```bash
 # Build the application
 npm run build
@@ -88,6 +95,7 @@ npm start
 ## Database Management
 
 ### Prisma Commands
+
 ```bash
 # View database in Prisma Studio
 npx prisma studio

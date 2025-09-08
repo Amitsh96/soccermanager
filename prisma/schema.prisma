@@ -6,7 +6,7 @@
   }
 
   datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
   }
 
@@ -29,6 +29,17 @@
     age         Int
     rating      Int
     photoUrl    String?
+
+    // API-Football integration fields
+    apiFootballId    Int?         @unique  // External API player ID
+    height           String?              // e.g., "185 cm"
+    weight           String?              // e.g., "80 kg"
+    birthDate        DateTime?            // More precise than age
+    birthPlace       String?              // City/country of birth
+    marketValue      String?              // Current market value
+    contractUntil    DateTime?            // Contract expiration
+    lastSyncAt       DateTime?            // When we last synced with API
+
     createdAt   DateTime     @default(now())
     teamPlayers TeamPlayer[]
   }

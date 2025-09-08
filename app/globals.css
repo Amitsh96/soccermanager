@@ -49,3 +49,27 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
+
+/* Team Builder hover effects */
+.player-slot {
+  position: relative;
+}
+
+.player-slot .tooltip {
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.player-slot .remove-btn {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.player-slot:hover .tooltip {
+  opacity: 1;
+}
+
+.player-slot:hover .remove-btn {
+  opacity: 1;
+}
