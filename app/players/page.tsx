@@ -49,11 +49,11 @@ export default function PlayersPage() {
     } finally {
       setLoading(false)
     }
-  }, [currentPage, filters, setLoading, setError, setPlayers, setPagination])
+  }, [currentPage, filters]) // Simplified dependencies
 
   useEffect(() => {
     fetchPlayers()
-  }, [currentPage, filters, fetchPlayers])
+  }, [fetchPlayers])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -333,7 +333,7 @@ export default function PlayersPage() {
                                 Height:
                               </span>
                               <div className="text-gray-600">
-                                {player.height || 'N/A'}
+                                {(player as any).height || 'N/A'}
                               </div>
                             </div>
                             <div>
@@ -341,7 +341,7 @@ export default function PlayersPage() {
                                 Weight:
                               </span>
                               <div className="text-gray-600">
-                                {player.weight || 'N/A'}
+                                {(player as any).weight || 'N/A'}
                               </div>
                             </div>
                             <div>
@@ -349,7 +349,7 @@ export default function PlayersPage() {
                                 Foot:
                               </span>
                               <div className="text-gray-600">
-                                {player.foot || 'N/A'}
+                                {(player as any).foot || 'N/A'}
                               </div>
                             </div>
                             <div>
@@ -357,7 +357,7 @@ export default function PlayersPage() {
                                 Market Value:
                               </span>
                               <div className="text-gray-600">
-                                {player.marketValue || 'N/A'}
+                                {(player as any).marketValue || 'N/A'}
                               </div>
                             </div>
                           </div>
@@ -366,7 +366,7 @@ export default function PlayersPage() {
                               Bio:
                             </span>
                             <div className="text-gray-600 text-sm mt-1">
-                              {player.bio ||
+                              {(player as any).bio ||
                                 'Professional footballer with extensive experience in top-level competitions.'}
                             </div>
                           </div>
