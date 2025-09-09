@@ -148,7 +148,9 @@ export default function MyTeamsPage() {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900">My Teams</h1>
-              <p className="text-gray-600 mt-1">Manage and build your soccer teams</p>
+              <p className="text-gray-600 mt-1">
+                Manage and build your soccer teams
+              </p>
             </div>
           </div>
           <button
@@ -168,9 +170,11 @@ export default function MyTeamsPage() {
             <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center mr-3">
               <span className="text-xl">✨</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Create New Team</h2>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Create New Team
+            </h2>
           </div>
-          
+
           <form onSubmit={handleCreateTeam} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-3">
@@ -186,10 +190,10 @@ export default function MyTeamsPage() {
                 maxLength={50}
               />
               <p className="mt-2 text-sm text-gray-500">
-                Choose a unique name that represents your team's identity
+                Choose a unique name that represents your team&apos;s identity
               </p>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 type="submit"
@@ -235,10 +239,7 @@ export default function MyTeamsPage() {
               Error Loading Teams
             </h3>
             <p className="text-red-600 mb-4">{error}</p>
-            <button
-              onClick={fetchTeams}
-              className="btn-secondary"
-            >
+            <button onClick={fetchTeams} className="btn-secondary">
               Try Again
             </button>
           </div>
@@ -281,10 +282,12 @@ export default function MyTeamsPage() {
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-8">
                   <span className="text-4xl">⚽</span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-700 mb-4">No Teams Yet</h2>
+                <h2 className="text-2xl font-bold text-gray-700 mb-4">
+                  No Teams Yet
+                </h2>
                 <p className="text-gray-500 mb-8 leading-relaxed">
-                  Ready to create your first team? Start building your dream squad 
-                  and show off your tactical genius!
+                  Ready to create your first team? Start building your dream
+                  squad and show off your tactical genius!
                 </p>
                 <button
                   onClick={() => setShowCreateForm(true)}
@@ -300,9 +303,12 @@ export default function MyTeamsPage() {
               {teams.map(team => {
                 const playersCount = team.teamPlayers?.length || 0
                 const isComplete = playersCount === 11
-                
+
                 return (
-                  <div key={team.id} className="football-card card-hover p-8 relative overflow-hidden">
+                  <div
+                    key={team.id}
+                    className="football-card card-hover p-8 relative overflow-hidden"
+                  >
                     {/* Delete Button */}
                     <button
                       onClick={() => handleDeleteTeam(team.id)}
@@ -324,11 +330,11 @@ export default function MyTeamsPage() {
                           <h3 className="text-xl font-bold text-gray-900 leading-tight">
                             {team.name}
                           </h3>
-                          <div className={`inline-flex px-2 py-1 rounded-full text-xs font-medium mt-1 ${
-                            isComplete 
-                              ? 'status-success' 
-                              : 'status-warning'
-                          }`}>
+                          <div
+                            className={`inline-flex px-2 py-1 rounded-full text-xs font-medium mt-1 ${
+                              isComplete ? 'status-success' : 'status-warning'
+                            }`}
+                          >
                             {isComplete ? '✅ Complete' : '⚠️ Incomplete'}
                           </div>
                         </div>
@@ -351,20 +357,24 @@ export default function MyTeamsPage() {
                           <div className="text-sm text-gray-500">Players</div>
                         </div>
                       </div>
-                      
+
                       <div className="text-center">
                         <p className="text-sm text-gray-500">
-                          Created {new Date(team.createdAt).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                          })}
+                          Created{' '}
+                          {new Date(team.createdAt).toLocaleDateString(
+                            'en-US',
+                            {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            }
+                          )}
                         </p>
                       </div>
 
                       {/* Progress Bar */}
                       <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className="football-gradient h-2 rounded-full transition-all duration-500"
                           style={{ width: `${(playersCount / 11) * 100}%` }}
                         ></div>
@@ -375,7 +385,7 @@ export default function MyTeamsPage() {
                     <div className="space-y-3">
                       <div className="grid grid-cols-2 gap-3">
                         <Link
-                          href={`/teams/${team.id}`}
+                          href={`/teams/${team.id}/public`}
                           className="btn-secondary !py-2 text-sm text-center"
                         >
                           <span className="mr-1">👁️</span>
@@ -389,7 +399,7 @@ export default function MyTeamsPage() {
                           Edit
                         </Link>
                       </div>
-                      
+
                       <Link
                         href={`/teams/${team.id}/build`}
                         className="w-full btn-primary !py-3 text-center block"
@@ -397,7 +407,7 @@ export default function MyTeamsPage() {
                         <span className="mr-2">⚽</span>
                         Build Formation
                       </Link>
-                      
+
                       <button
                         onClick={() => handleShareTeam(team.id)}
                         className="w-full px-4 py-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-300 font-medium text-sm"

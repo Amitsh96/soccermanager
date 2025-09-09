@@ -33,12 +33,14 @@ export async function GET(request: NextRequest) {
     if (query.search) {
       where.name = {
         contains: query.search,
+        mode: 'insensitive',
       }
     }
 
     if (query.club) {
       where.club = {
         contains: query.club,
+        mode: 'insensitive',
       }
     }
 

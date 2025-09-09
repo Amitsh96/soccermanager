@@ -19,6 +19,7 @@ export default function PlayersPage() {
   } = usePlayersStore()
 
   const [searchInput, setSearchInput] = useState('')
+  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set())
 
   const fetchPlayers = async () => {
     setLoading(true)
@@ -65,6 +66,18 @@ export default function PlayersPage() {
     setPagination(1, totalPages, 0) // Reset to page 1
   }
 
+  const toggleCardExpansion = (playerId: string) => {
+    setExpandedCards(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(playerId)) {
+        newSet.delete(playerId)
+      } else {
+        newSet.add(playerId)
+      }
+      return newSet
+    })
+  }
+
   const positions = [
     'GK',
     'CB',
@@ -78,21 +91,6 @@ export default function PlayersPage() {
     'ST',
   ]
 
-  const getPositionColor = (position: string) => {
-    const colorMap: { [key: string]: string } = {
-      'GK': 'bg-yellow-100 text-yellow-800',
-      'CB': 'bg-blue-100 text-blue-800',
-      'LB': 'bg-blue-100 text-blue-800',
-      'RB': 'bg-blue-100 text-blue-800',
-      'CDM': 'bg-purple-100 text-purple-800',
-      'CM': 'bg-green-100 text-green-800',
-      'CAM': 'bg-green-100 text-green-800',
-      'LW': 'bg-red-100 text-red-800',
-      'RW': 'bg-red-100 text-red-800',
-      'ST': 'bg-orange-100 text-orange-800',
-    }
-    return colorMap[position] || 'bg-gray-100 text-gray-800'
-  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -103,8 +101,12 @@ export default function PlayersPage() {
             <span className="text-2xl">⚽</span>
           </div>
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Players Catalog</h1>
-            <p className="text-gray-600 mt-1">Discover and scout players for your dream team</p>
+            <h1 className="text-4xl font-bold text-gray-900">
+              Players Catalog
+            </h1>
+            <p className="text-gray-600 mt-1">
+              Discover and scout players for your dream team
+            </p>
           </div>
         </div>
       </div>
@@ -113,7 +115,10 @@ export default function PlayersPage() {
       <div className="football-card p-6 mb-8">
         <div className="space-y-6">
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">
+          <form
+            onSubmit={handleSearch}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <div className="flex-1 relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-500 text-xl">🔍</span>
@@ -126,10 +131,7 @@ export default function PlayersPage() {
                 className="stadium-input pl-12"
               />
             </div>
-            <button
-              type="submit"
-              className="btn-primary whitespace-nowrap"
-            >
+            <button type="submit" className="btn-primary whitespace-nowrap">
               <span className="mr-2">🎯</span>
               Search
             </button>
@@ -146,7 +148,9 @@ export default function PlayersPage() {
               >
                 <option value="">All Positions</option>
                 {positions.map(pos => (
-                  <option key={pos} value={pos}>{pos}</option>
+                  <option key={pos} value={pos}>
+                    {pos}
+                  </option>
                 ))}
               </select>
               <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -186,11 +190,13 @@ export default function PlayersPage() {
       {!loading && (
         <div className="mb-6">
           <p className="text-gray-600">
-            Showing <span className="font-semibold text-gray-900">{players.length}</span> players
+            Showing{' '}
+            <span className="font-semibold text-gray-900">
+              {players.length}
+            </span>{' '}
+            players
             {(filters.search || filters.position || filters.club) && (
-              <span className="ml-1">
-                matching your search criteria
-              </span>
+              <span className="ml-1">matching your search criteria</span>
             )}
           </p>
         </div>
@@ -207,10 +213,7 @@ export default function PlayersPage() {
               Unable to Load Players
             </h3>
             <p className="text-red-600 mb-4">{error}</p>
-            <button
-              onClick={fetchPlayers}
-              className="btn-secondary"
-            >
+            <button onClick={fetchPlayers} className="btn-secondary">
               Try Again
             </button>
           </div>
@@ -246,7 +249,8 @@ export default function PlayersPage() {
                   No Players Found
                 </h3>
                 <p className="text-gray-500 mb-6">
-                  Try adjusting your search criteria or filters to find more players.
+                  Try adjusting your search criteria or filters to find more
+                  players.
                 </p>
                 <button
                   onClick={() => {
@@ -262,68 +266,109 @@ export default function PlayersPage() {
             </div>
           ) : (
             <div className="players-grid fade-in">
-              {players.map(player => (
-                <div key={player.id} className="football-card card-hover p-6">
-                  {/* Player Avatar */}
-                  <div className="text-center mb-6">
-                    <div className="w-20 h-20 mx-auto mb-4 football-gradient rounded-full flex items-center justify-center text-2xl text-white font-bold shadow-lg">
-                      {player.name.split(' ').map(n => n[0]).join('')}
+              {players.map(player => {
+                const isExpanded = expandedCards.has(player.id)
+                return (
+                  <div key={player.id} className="football-card card-hover p-6">
+                    {/* Player Avatar */}
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 mx-auto mb-4 football-gradient rounded-full flex items-center justify-center text-2xl text-white font-bold shadow-lg">
+                        {player.name
+                          .split(' ')
+                          .map(n => n[0])
+                          .join('')}
+                      </div>
+                      <div className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+                        {player.position}
+                      </div>
                     </div>
-                    <div className={`inline-flex px-3 py-1 rounded-full text-xs font-semibold ${getPositionColor(player.position)}`}>
-                      {player.position}
+
+                    {/* Player Info */}
+                    <div className="text-center space-y-3">
+                      <h3 className="font-bold text-lg text-gray-900 leading-tight">
+                        {player.name}
+                      </h3>
+
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center justify-center text-gray-600">
+                          <span className="mr-2">🏟️</span>
+                          <span>{player.club}</span>
+                        </div>
+
+                        <div className="flex items-center justify-center text-gray-600">
+                          <span className="mr-2">🌍</span>
+                          <span>{player.nationality}</span>
+                        </div>
+                      </div>
+
+                      {/* Stats Preview */}
+                      <div className="pt-4 border-t border-gray-100">
+                        <div className="grid grid-cols-3 gap-4 text-center text-sm">
+                          <div>
+                            <div className="font-semibold text-green-600">
+                              {player.rating}
+                            </div>
+                            <div className="text-gray-500">Rating</div>
+                          </div>
+                          <div>
+                            <div className="font-semibold text-blue-600">
+                              {player.age}
+                            </div>
+                            <div className="text-gray-500">Age</div>
+                          </div>
+                          <div>
+                            <div className="font-semibold text-purple-600">
+                              {player.rating}
+                            </div>
+                            <div className="text-gray-500">Overall</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Expanded Details */}
+                      {isExpanded && (
+                        <div className="pt-4 border-t border-gray-100 space-y-3 text-left">
+                          <div className="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <span className="font-semibold text-gray-700">Height:</span>
+                              <div className="text-gray-600">{player.height || 'N/A'}</div>
+                            </div>
+                            <div>
+                              <span className="font-semibold text-gray-700">Weight:</span>
+                              <div className="text-gray-600">{player.weight || 'N/A'}</div>
+                            </div>
+                            <div>
+                              <span className="font-semibold text-gray-700">Foot:</span>
+                              <div className="text-gray-600">{player.foot || 'N/A'}</div>
+                            </div>
+                            <div>
+                              <span className="font-semibold text-gray-700">Market Value:</span>
+                              <div className="text-gray-600">{player.marketValue || 'N/A'}</div>
+                            </div>
+                          </div>
+                          <div>
+                            <span className="font-semibold text-gray-700">Bio:</span>
+                            <div className="text-gray-600 text-sm mt-1">
+                              {player.bio || 'Professional footballer with extensive experience in top-level competitions.'}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Action Button */}
+                      <div className="pt-4">
+                        <button 
+                          onClick={() => toggleCardExpansion(player.id)}
+                          className="w-full btn-secondary !py-2 text-sm transition-all duration-300"
+                        >
+                          <span className="mr-2">{isExpanded ? '🔼' : '👁️'}</span>
+                          {isExpanded ? 'Show Less' : 'View Details'}
+                        </button>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Player Info */}
-                  <div className="text-center space-y-3">
-                    <h3 className="font-bold text-lg text-gray-900 leading-tight">
-                      {player.name}
-                    </h3>
-                    
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center justify-center text-gray-600">
-                        <span className="mr-2">🏟️</span>
-                        <span>{player.club}</span>
-                      </div>
-                      
-                      <div className="flex items-center justify-center text-gray-600">
-                        <span className="mr-2">🌍</span>
-                        <span>{player.nationality}</span>
-                      </div>
-                    </div>
-
-                    {/* Stats Preview */}
-                    <div className="pt-4 border-t border-gray-100">
-                      <div className="grid grid-cols-3 gap-4 text-center text-sm">
-                        <div>
-                          <div className="font-semibold text-green-600">{player.rating}</div>
-                          <div className="text-gray-500">Rating</div>
-                        </div>
-                        <div>
-                          <div className="font-semibold text-blue-600">{player.age}</div>
-                          <div className="text-gray-500">Age</div>
-                        </div>
-                        <div>
-                          <div className="font-semibold text-purple-600">
-                            {player.position === 'GK' ? player.diving : player.pace}
-                          </div>
-                          <div className="text-gray-500">
-                            {player.position === 'GK' ? 'Diving' : 'Pace'}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <div className="pt-4">
-                      <button className="w-full btn-secondary !py-2 text-sm">
-                        <span className="mr-2">👁️</span>
-                        View Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </>
@@ -341,7 +386,7 @@ export default function PlayersPage() {
               >
                 Previous
               </button>
-              
+
               <div className="flex space-x-1">
                 {[...Array(Math.min(5, totalPages))].map((_, i) => {
                   const page = i + 1

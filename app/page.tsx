@@ -42,8 +42,9 @@ export default function Home() {
 
             {/* Subtitle */}
             <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Professional soccer team management made simple. Create formations, 
-              manage players, and share your tactical masterpieces with the world.
+              Professional soccer team management made simple. Create
+              formations, manage players, and share your tactical masterpieces
+              with the world.
             </p>
 
             {/* CTA Buttons */}
@@ -79,9 +80,12 @@ export default function Home() {
                 <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center">
                   <span className="text-2xl">👥</span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Player Management</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  Player Management
+                </h3>
                 <p className="text-gray-600 text-sm">
-                  Browse and search through hundreds of players with detailed stats and positions.
+                  Browse and search through hundreds of players with detailed
+                  stats and positions.
                 </p>
               </div>
 
@@ -89,9 +93,12 @@ export default function Home() {
                 <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center">
                   <span className="text-2xl">⚽</span>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Formation Builder</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  Formation Builder
+                </h3>
                 <p className="text-gray-600 text-sm">
-                  Create tactical formations with our interactive field visualization and position system.
+                  Create tactical formations with our interactive field
+                  visualization and position system.
                 </p>
               </div>
 
@@ -101,7 +108,8 @@ export default function Home() {
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Share Teams</h3>
                 <p className="text-gray-600 text-sm">
-                  Share your team formations with friends and the community with public links.
+                  Share your team formations with friends and the community with
+                  public links.
                 </p>
               </div>
             </div>
@@ -110,9 +118,18 @@ export default function Home() {
 
         {/* Floating Elements */}
         <div className="absolute top-20 left-10 w-4 h-4 bg-green-400 rounded-full animate-pulse opacity-60"></div>
-        <div className="absolute top-40 right-20 w-6 h-6 bg-yellow-400 rounded-full animate-pulse opacity-60" style={{animationDelay: '1s'}}></div>
-        <div className="absolute bottom-32 left-20 w-3 h-3 bg-green-500 rounded-full animate-pulse opacity-60" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-20 right-10 w-5 h-5 bg-blue-400 rounded-full animate-pulse opacity-60" style={{animationDelay: '0.5s'}}></div>
+        <div
+          className="absolute top-40 right-20 w-6 h-6 bg-yellow-400 rounded-full animate-pulse opacity-60"
+          style={{ animationDelay: '1s' }}
+        ></div>
+        <div
+          className="absolute bottom-32 left-20 w-3 h-3 bg-green-500 rounded-full animate-pulse opacity-60"
+          style={{ animationDelay: '2s' }}
+        ></div>
+        <div
+          className="absolute bottom-20 right-10 w-5 h-5 bg-blue-400 rounded-full animate-pulse opacity-60"
+          style={{ animationDelay: '0.5s' }}
+        ></div>
       </section>
 
       {/* Features Section */}
@@ -123,8 +140,8 @@ export default function Home() {
               Everything You Need to Manage Your Team
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From player scouting to tactical formations, we've got all the tools 
-              you need to create and manage your perfect soccer team.
+              From player scouting to tactical formations, we&apos;ve got all
+              the tools you need to create and manage your perfect soccer team.
             </p>
           </div>
 
@@ -138,8 +155,9 @@ export default function Home() {
                 Interactive Formation Builder
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Design your tactical setup with our realistic soccer field visualization. 
-                Choose from popular formations like 4-3-3, 4-4-2, or create your own custom setup.
+                Design your tactical setup with our realistic soccer field
+                visualization. Choose from popular formations like 4-3-3, 4-4-2,
+                or create your own custom setup.
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-center">
@@ -175,17 +193,30 @@ export default function Home() {
             {/* Visual Placeholder */}
             <div className="md:order-3 football-card p-8">
               <div className="grid grid-cols-2 gap-4">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className="bg-gray-50 rounded-xl p-4 text-center">
-                    <div className="w-12 h-12 bg-green-100 rounded-full mx-auto mb-2 flex items-center justify-center">
-                      <span className="text-sm font-semibold">P{i}</span>
+                {[
+                  { name: "Messi", position: "RW", club: "PSG", rating: "93" },
+                  { name: "Haaland", position: "ST", club: "City", rating: "88" },
+                  { name: "Mbappé", position: "LW", club: "PSG", rating: "91" },
+                  { name: "De Bruyne", position: "CM", club: "City", rating: "91" }
+                ].map((player, i) => (
+                  <div
+                    key={i}
+                    className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full mx-auto mb-2 flex items-center justify-center text-white shadow-lg">
+                      <span className="text-xs font-bold">{player.rating}</span>
                     </div>
-                    <p className="text-xs text-gray-600">Player {i}</p>
-                    <p className="text-xs text-green-600 font-medium">ST</p>
+                    <p className="text-sm font-semibold text-gray-800 truncate">{player.name}</p>
+                    <p className="text-xs text-gray-500 mb-1">{player.club}</p>
+                    <span className="inline-block px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                      {player.position}
+                    </span>
                   </div>
                 ))}
               </div>
-              <p className="text-center text-sm text-gray-500 mt-4">Player Catalog Preview</p>
+              <p className="text-center text-sm text-gray-500 mt-4">
+                Player Catalog Preview
+              </p>
             </div>
 
             {/* Feature 2 */}
@@ -197,8 +228,9 @@ export default function Home() {
                 Comprehensive Player Database
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Access detailed player information with advanced filtering and search capabilities. 
-                Find the perfect players for each position in your formation.
+                Access detailed player information with advanced filtering and
+                search capabilities. Find the perfect players for each position
+                in your formation.
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-center">
@@ -226,13 +258,16 @@ export default function Home() {
             Ready to Build Your Dream Team?
           </h2>
           <p className="text-xl text-green-100 mb-10 max-w-2xl mx-auto">
-            Join thousands of soccer enthusiasts who are already creating and sharing 
-            their tactical masterpieces.
+            Join thousands of soccer enthusiasts who are already creating and
+            sharing their tactical masterpieces.
           </p>
           {!session && (
-            <Link href="/auth/signup" className="btn-success !bg-white !text-green-600 hover:!bg-gray-100">
+            <Link
+              href="/auth/signup"
+              className="btn-success !bg-white !text-green-600 hover:!bg-gray-100"
+            >
               <span className="mr-2">🚀</span>
-              Start Building Now - It's Free!
+              Start Building Now - It&apos;s Free!
             </Link>
           )}
         </div>

@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Soccer Manager - Build Your Dream Team',
-  description: 'Professional soccer team management webapp. Build formations, manage players, and share your teams with the world.',
+  description:
+    'Professional soccer team management webapp. Build formations, manage players, and share your teams with the world.',
   keywords: 'soccer, football, team manager, formation, players, sports',
   authors: [{ name: 'Soccer Manager' }],
   creator: 'Soccer Manager',
@@ -16,13 +17,15 @@ export const metadata = {
     type: 'website',
     locale: 'en_US',
     title: 'Soccer Manager - Build Your Dream Team',
-    description: 'Professional soccer team management webapp. Build formations, manage players, and share your teams.',
+    description:
+      'Professional soccer team management webapp. Build formations, manage players, and share your teams.',
     siteName: 'Soccer Manager',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Soccer Manager - Build Your Dream Team',
-    description: 'Professional soccer team management webapp. Build formations, manage players, and share your teams.',
+    description:
+      'Professional soccer team management webapp. Build formations, manage players, and share your teams.',
   },
   robots: {
     index: true,
@@ -50,9 +53,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <div className="min-h-screen bg-gradient-to-br from-gray-50 to-green-50">
             <Navigation />
-            <main className="pt-16">
-              {children}
-            </main>
+            <main className="pt-20">{children}</main>
           </div>
         </SessionProvider>
       </body>

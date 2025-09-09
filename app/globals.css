@@ -2,35 +2,185 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Essential Tailwind utilities for Navigation */
+.fixed {
+  position: fixed;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  margin-left: 0.75rem;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+.h-10 {
+  height: 2.5rem;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.text-white {
+  color: white;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.bg-white\/95 {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-green-100 {
+  border-color: #dcfce7;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.pt-16 {
+  padding-top: 4rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
+}
+
+/* Navigation Link Styles */
+.nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #f3f4f6;
+  color: var(--field-green);
+}
+
+.nav-active {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background: var(--field-gradient);
+  color: white;
+  text-decoration: none;
+}
+
 /* Football-themed CSS Custom Properties */
 :root {
   /* Primary Football Colors */
-  --field-green: #1B5E20;
-  --grass-green: #2E7D32; 
-  --pitch-light: #4CAF50;
-  --stadium-white: #FAFAFA;
-  --line-white: #FFFFFF;
-  
+  --field-green: #1b5e20;
+  --grass-green: #2e7d32;
+  --pitch-light: #4caf50;
+  --stadium-white: #fafafa;
+  --line-white: #ffffff;
+
   /* Accent Colors */
-  --champions-gold: #FFD700;
-  --red-card: #D32F2F;
-  --yellow-card: #FFA000;
-  --night-sky: #0D47A1;
+  --champions-gold: #ffd700;
+  --red-card: #d32f2f;
+  --yellow-card: #ffa000;
+  --night-sky: #0d47a1;
   --charcoal: #212121;
   --stadium-gray: #424242;
   --field-shadow: rgba(27, 94, 32, 0.1);
-  
+
   /* Gradients */
-  --field-gradient: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #4CAF50 100%);
-  --stadium-gradient: linear-gradient(to bottom, #FAFAFA 0%, #F5F5F5 100%);
-  --grass-texture: 
-    repeating-linear-gradient(
-      90deg,
-      #2E7D32 0px,
-      #2E7D32 40px,
-      #1B5E20 40px,
-      #1B5E20 80px
-    );
+  --field-gradient: linear-gradient(
+    135deg,
+    #1b5e20 0%,
+    #2e7d32 50%,
+    #4caf50 100%
+  );
+  --stadium-gradient: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+  --grass-texture: repeating-linear-gradient(
+    90deg,
+    #2e7d32 0px,
+    #2e7d32 40px,
+    #1b5e20 40px,
+    #1b5e20 80px
+  );
 }
 
 * {
@@ -44,7 +194,13 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background: var(--stadium-gradient);
   color: var(--charcoal);
   line-height: 1.6;
@@ -62,14 +218,14 @@ body {
 }
 
 .stadium-shadow {
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .field-shadow {
-  box-shadow: 
+  box-shadow:
     0 10px 25px var(--field-shadow),
     0 4px 6px rgba(0, 0, 0, 0.05);
 }
@@ -80,16 +236,24 @@ body {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 20px 40px var(--field-shadow),
     0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Professional Football Buttons */
 .btn-primary {
-  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: white;
   background: var(--field-gradient);
   border: 2px solid transparent;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .btn-primary:hover {
@@ -99,10 +263,16 @@ body {
 }
 
 .btn-secondary {
-  @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
   background: white;
   color: var(--field-green);
   border: 2px solid var(--field-green);
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
@@ -112,31 +282,48 @@ body {
 }
 
 .btn-danger {
-  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  color: white;
   background: var(--red-card);
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .btn-danger:hover {
-  background: #B71C1C;
+  background: #b71c1c;
   transform: translateY(-2px);
 }
 
 .btn-success {
-  @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
-  background: var(--champions-gold);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
   color: var(--charcoal);
+  background: var(--champions-gold);
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .btn-success:hover {
-  background: #FFB300;
+  background: #ffb300;
   transform: translateY(-2px);
 }
 
 /* Premium Card Styles */
 .football-card {
-  @apply bg-white rounded-2xl border-0 overflow-hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: white;
+  border-radius: 1rem;
   border: 1px solid rgba(27, 94, 32, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .football-card:hover {
@@ -146,7 +333,12 @@ body {
 
 /* Stadium-style Input Fields */
 .stadium-input {
-  @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 bg-white transition-all duration-300;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e5e7eb;
+  background: white;
+  transition: all 0.3s ease;
   font-family: 'Inter', sans-serif;
 }
 
@@ -199,11 +391,18 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%),
-    linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    ),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%);
+  background-size:
+    100% 100%,
+    40px 40px,
+    40px 40px;
 }
 
 .field-lines {
@@ -267,8 +466,12 @@ body {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .fade-in {
@@ -276,25 +479,43 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Status indicators */
 .status-success {
-  @apply px-3 py-1 rounded-full text-sm font-medium;
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
   background: rgba(76, 175, 80, 0.1);
   color: var(--grass-green);
 }
 
 .status-warning {
-  @apply px-3 py-1 rounded-full text-sm font-medium;
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
   background: rgba(255, 160, 0, 0.1);
   color: var(--yellow-card);
 }
 
 .status-error {
-  @apply px-3 py-1 rounded-full text-sm font-medium;
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
   background: rgba(211, 47, 47, 0.1);
   color: var(--red-card);
 }

@@ -69,8 +69,8 @@ export default function PublicTeamPage({
     return formation.positions
   }
 
-  const getPlayerForPosition = (position: string) => {
-    return team?.teamPlayers.find(tp => tp.position === position)?.player
+  const getPlayerForPosition = (slotId: string) => {
+    return team?.teamPlayers.find(tp => tp.position === slotId)?.player
   }
 
   if (loading) {
@@ -358,7 +358,7 @@ export default function PublicTeamPage({
 
           {/* Player Slots - Read Only */}
           {slots.map(slot => {
-            const player = getPlayerForPosition(slot.position)
+            const player = getPlayerForPosition(slot.id)
             return (
               <div
                 key={slot.id}
@@ -485,7 +485,7 @@ export default function PublicTeamPage({
               <div className="text-gray-600">{tp.player.club}</div>
               <div className="flex justify-between items-center mt-2">
                 <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
-                  {tp.position}
+                  {tp.player.position}
                 </span>
                 <span className="font-bold text-lg text-blue-600">
                   {tp.player.rating}

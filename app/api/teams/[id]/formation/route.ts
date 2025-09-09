@@ -62,7 +62,7 @@ export async function GET(
       teamId: team.id,
       formation: team.formation,
       players: team.teamPlayers.map((tp: TeamPlayer) => ({
-        slotId: tp.position.toLowerCase().replace(/\s+/g, ''), // Convert "LW" to "lw"
+        slotId: tp.position, // Position is now the unique slot ID
         position: tp.position,
         playerId: tp.player.id,
         player: {
@@ -101,6 +101,14 @@ export async function PUT(
     const body: SaveFormationData = await request.json()
     const { formation, players } = body
 
+    // Debug logging
+    console.log('Formation save attempt:', {
+      teamId: id,
+      formation,
+      playersCount: players.length,
+      players: players.map(p => ({ playerId: p.playerId, position: p.position }))
+    })
+
     // Validate required fields
     if (!formation || !players || !Array.isArray(players)) {
       return NextResponse.json(
@@ -131,6 +139,32 @@ export async function PUT(
           { status: 400 }
         )
       }
+    }
+
+    // Check for duplicate players
+    const playerIds = players.map(p => p.playerId)
+    const uniquePlayerIds = new Set(playerIds)
+    if (playerIds.length !== uniquePlayerIds.size) {
+      console.log('Duplicate player IDs found:', playerIds)
+      return NextResponse.json(
+        {
+          error: 'Duplicate players detected - each player can only be assigned once',
+        },
+        { status: 400 }
+      )
+    }
+
+    // Check for duplicate positions
+    const positions = players.map(p => p.position)
+    const uniquePositions = new Set(positions)
+    if (positions.length !== uniquePositions.size) {
+      console.log('Duplicate positions found:', positions)
+      return NextResponse.json(
+        {
+          error: 'Duplicate positions detected - each position can only have one player',
+        },
+        { status: 400 }
+      )
     }
 
     // Verify team belongs to user
