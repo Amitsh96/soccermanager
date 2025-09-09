@@ -24,7 +24,10 @@ export async function GET(request: NextRequest) {
 
     if (!session?.user?.email) {
       console.log('No session found, returning unauthorized')
-      return NextResponse.json({ error: 'Please sign in to view your teams' }, { status: 401 })
+      return NextResponse.json(
+        { error: 'Please sign in to view your teams' },
+        { status: 401 }
+      )
     }
 
     console.log('Looking for user with email:', session.user.email)
@@ -35,14 +38,21 @@ export async function GET(request: NextRequest) {
     if (!user) {
       console.log('User not found in database:', session.user.email)
       // Let's also check what users exist
-      const allUsers = await prisma.user.findMany({ select: { id: true, email: true } })
+      const allUsers = await prisma.user.findMany({
+        select: { id: true, email: true },
+      })
       console.log('All users in database:', allUsers)
-      return NextResponse.json({ error: 'User account not found. Please try signing out and back in.' }, { status: 404 })
+      return NextResponse.json(
+        {
+          error: 'User account not found. Please try signing out and back in.',
+        },
+        { status: 404 }
+      )
     }
 
     console.log('Found user:', user.id, user.email)
     console.log('Fetching teams for user:', user.id)
-    
+
     const teams = await prisma.team.findMany({
       where: { userId: user.id },
       include: {
@@ -88,7 +98,7 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     console.log('Team creation request:', body)
-    
+
     const { name, formation } = createTeamSchema.parse(body)
 
     const team = await prisma.team.create({
@@ -110,7 +120,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ team }, { status: 201 })
   } catch (error) {
     console.error('Teams API POST error:', error)
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Validation failed', details: error.issues },

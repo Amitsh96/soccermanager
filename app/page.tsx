@@ -194,10 +194,20 @@ export default function Home() {
             <div className="md:order-3 football-card p-8">
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { name: "Messi", position: "RW", club: "PSG", rating: "93" },
-                  { name: "Haaland", position: "ST", club: "City", rating: "88" },
-                  { name: "Mbappé", position: "LW", club: "PSG", rating: "91" },
-                  { name: "De Bruyne", position: "CM", club: "City", rating: "91" }
+                  { name: 'Messi', position: 'RW', club: 'PSG', rating: '93' },
+                  {
+                    name: 'Haaland',
+                    position: 'ST',
+                    club: 'City',
+                    rating: '88',
+                  },
+                  { name: 'Mbappé', position: 'LW', club: 'PSG', rating: '91' },
+                  {
+                    name: 'De Bruyne',
+                    position: 'CM',
+                    club: 'City',
+                    rating: '91',
+                  },
                 ].map((player, i) => (
                   <div
                     key={i}
@@ -206,7 +216,9 @@ export default function Home() {
                     <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full mx-auto mb-2 flex items-center justify-center text-white shadow-lg">
                       <span className="text-xs font-bold">{player.rating}</span>
                     </div>
-                    <p className="text-sm font-semibold text-gray-800 truncate">{player.name}</p>
+                    <p className="text-sm font-semibold text-gray-800 truncate">
+                      {player.name}
+                    </p>
                     <p className="text-xs text-gray-500 mb-1">{player.club}</p>
                     <span className="inline-block px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
                       {player.position}

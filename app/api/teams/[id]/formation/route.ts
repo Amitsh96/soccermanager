@@ -106,7 +106,10 @@ export async function PUT(
       teamId: id,
       formation,
       playersCount: players.length,
-      players: players.map(p => ({ playerId: p.playerId, position: p.position }))
+      players: players.map(p => ({
+        playerId: p.playerId,
+        position: p.position,
+      })),
     })
 
     // Validate required fields
@@ -148,7 +151,8 @@ export async function PUT(
       console.log('Duplicate player IDs found:', playerIds)
       return NextResponse.json(
         {
-          error: 'Duplicate players detected - each player can only be assigned once',
+          error:
+            'Duplicate players detected - each player can only be assigned once',
         },
         { status: 400 }
       )
@@ -161,7 +165,8 @@ export async function PUT(
       console.log('Duplicate positions found:', positions)
       return NextResponse.json(
         {
-          error: 'Duplicate positions detected - each position can only have one player',
+          error:
+            'Duplicate positions detected - each position can only have one player',
         },
         { status: 400 }
       )

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { usePlayersStore } from '../../lib/store/playersStore'
 
 export default function PlayersPage() {
@@ -21,7 +21,7 @@ export default function PlayersPage() {
   const [searchInput, setSearchInput] = useState('')
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set())
 
-  const fetchPlayers = async () => {
+  const fetchPlayers = useCallback(async () => {
     setLoading(true)
     setError(null)
 
@@ -49,11 +49,11 @@ export default function PlayersPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, filters, setLoading, setError, setPlayers, setPagination])
 
   useEffect(() => {
     fetchPlayers()
-  }, [currentPage, filters])
+  }, [currentPage, filters, fetchPlayers])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,7 +90,6 @@ export default function PlayersPage() {
     'RW',
     'ST',
   ]
-
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -330,26 +329,45 @@ export default function PlayersPage() {
                         <div className="pt-4 border-t border-gray-100 space-y-3 text-left">
                           <div className="grid grid-cols-2 gap-4 text-sm">
                             <div>
-                              <span className="font-semibold text-gray-700">Height:</span>
-                              <div className="text-gray-600">{player.height || 'N/A'}</div>
+                              <span className="font-semibold text-gray-700">
+                                Height:
+                              </span>
+                              <div className="text-gray-600">
+                                {player.height || 'N/A'}
+                              </div>
                             </div>
                             <div>
-                              <span className="font-semibold text-gray-700">Weight:</span>
-                              <div className="text-gray-600">{player.weight || 'N/A'}</div>
+                              <span className="font-semibold text-gray-700">
+                                Weight:
+                              </span>
+                              <div className="text-gray-600">
+                                {player.weight || 'N/A'}
+                              </div>
                             </div>
                             <div>
-                              <span className="font-semibold text-gray-700">Foot:</span>
-                              <div className="text-gray-600">{player.foot || 'N/A'}</div>
+                              <span className="font-semibold text-gray-700">
+                                Foot:
+                              </span>
+                              <div className="text-gray-600">
+                                {player.foot || 'N/A'}
+                              </div>
                             </div>
                             <div>
-                              <span className="font-semibold text-gray-700">Market Value:</span>
-                              <div className="text-gray-600">{player.marketValue || 'N/A'}</div>
+                              <span className="font-semibold text-gray-700">
+                                Market Value:
+                              </span>
+                              <div className="text-gray-600">
+                                {player.marketValue || 'N/A'}
+                              </div>
                             </div>
                           </div>
                           <div>
-                            <span className="font-semibold text-gray-700">Bio:</span>
+                            <span className="font-semibold text-gray-700">
+                              Bio:
+                            </span>
                             <div className="text-gray-600 text-sm mt-1">
-                              {player.bio || 'Professional footballer with extensive experience in top-level competitions.'}
+                              {player.bio ||
+                                'Professional footballer with extensive experience in top-level competitions.'}
                             </div>
                           </div>
                         </div>
@@ -357,11 +375,13 @@ export default function PlayersPage() {
 
                       {/* Action Button */}
                       <div className="pt-4">
-                        <button 
+                        <button
                           onClick={() => toggleCardExpansion(player.id)}
                           className="w-full btn-secondary !py-2 text-sm transition-all duration-300"
                         >
-                          <span className="mr-2">{isExpanded ? '🔼' : '👁️'}</span>
+                          <span className="mr-2">
+                            {isExpanded ? '🔼' : '👁️'}
+                          </span>
                           {isExpanded ? 'Show Less' : 'View Details'}
                         </button>
                       </div>
